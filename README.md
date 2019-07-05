@@ -16,35 +16,3 @@ query {
 }
 
 
-function getDiskUsageForOrganization(organization) {
-  return fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${githubToken}`
-    },
-    body: JSON.stringify({
-      query: `{
-        organization(login: "${organization}"){
-  	      members(last: 100){
-          nodes{
-            avatarUrl
-            url
-            login
-            repositories(last: 100){
-              nodes{
-                name
-                diskUsage
-                url
-        	    }
-              totalCount
-              totalDiskUsage
-            }
-          }
-        } 
-      }
-    }`
-    })
-  })
-  .then(response => response.json())
-  .then(formatted => formatted.data.organization.members.nodes)
-}
