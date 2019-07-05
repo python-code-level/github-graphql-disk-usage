@@ -9,14 +9,11 @@ function getDiskUsageForOrganization(organization) {
         organization(login: "${organization}"){
   	      members(last: 100){
           nodes{
-            avatarUrl
-            url
             login
             repositories(last: 100){
               nodes{
                 name
                 diskUsage
-                url
         	    }
               totalCount
               totalDiskUsage
